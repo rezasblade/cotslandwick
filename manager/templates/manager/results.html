@@ -1,0 +1,29 @@
+{% extends "manager/base.html" %}
+{% block content %}
+
+<table class="table table-dark">
+
+  <thead>
+    <tr>
+      <!-- <th scope="col">#</th> -->
+      <th scope="col">Match Name</th>
+      <th scope="col">Home Team Score</th>
+      <th scope="col">Away Team Score</th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+   {% for i in result %}
+    <tr>
+
+  <!--     <th scope="row">1</th> -->
+      <td>{{i.match}}</td>
+      <td>{{i.score_hometeam}}</td>
+      <td>{{i.score_awayteam}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
