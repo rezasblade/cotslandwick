@@ -1,0 +1,14 @@
+{% extends "manager/base.html" %}
+{% block content %}
+<form action="{% url 'new_player' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="form-group row">
+        <label for="new_player" class="col-form-label col-sm-2">Add New Player:</label>
+        <div class="col-sm-10">
+            <input type="text" name="new_player" class="form-control">
+        </div>
+    </div>
+    <input type="submit" value="Add New Player" class="btn btn-block btn-secondary">
+</form>
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends "manager/base.html" %}
+{% block content %}
+
+<table class="table table-dark">
+
+  <thead>
+    <tr>
+      <!-- <th scope="col">#</th> -->
+      <th scope="col">Name</th>
+      <th scope="col">Points</th>
+      <th scope="col">Position</th>
+      <th scope="col">Preferred Foot</th>
+      <th scope="col">Trait</th>
+      <th scope="col">Wins</th>
+      <th scope="col">Losses</th>
+      <th scope="col">Draws</th>
+    </tr>
+  </thead>
+
+
+  <tbody>
+   {% for i in player_stats %}
+    <tr>
+
+  <!--     <th scope="row">1</th> -->
+      <td>{{i.0}}</td>
+      <td>{{i.4}}</td>
+      <td><!-- {{i.position}} --></td>
+      <td><!-- {{i.preferred_foot}} --></td>
+      <td><!-- {{i.trait}} --></td>
+      <td>{{i.1}}</td>
+      <td>{{i.3}}</td>
+      <td>{{i.2}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}

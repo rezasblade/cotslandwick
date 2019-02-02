@@ -1,0 +1,39 @@
+{% extends "manager/base.html" %}
+{% block content %}
+<h1>Player Points</h1>
+<div>
+  <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
+</div>
+
+
+<table class="table table-dark">
+
+  <thead>
+    <tr>
+      <!-- <th scope="col">#</th> -->
+      <th scope="col">MatchDate</th>
+      <th scope="col">Reds score</th>
+      <th scope="col">Blue sscore</th>
+
+      <th scope="col">MatchType</th>
+      <th scope="col">DeleteMe</th>
+
+    </tr>
+  </thead>
+
+
+  <tbody>
+   {% for i in object %}
+    <tr>
+      <td><a href="{% url 'results-detail' i.id %}" style="display:block;">{{i.matchdate}}</a></td>
+      <td>{{i.redsscore}}</td>
+      <td>{{i.bluescore}}</td>
+
+      <td>{{i.matchdate.matchtype}}</td>
+      <td>{{i.name}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock content %}
