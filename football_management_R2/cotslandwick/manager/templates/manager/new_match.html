@@ -1,0 +1,183 @@
+{% extends "manager/base.html" %}
+{% block content %}
+<h1>Home Page</h1>
+<div>
+  <img class="rounded-circle account-img" src="{{user.profile.image.url}}">
+</div>
+
+<form action="{% url 'new_match' %}" method="POST">
+  {% csrf_token %}
+  <div class="form-group row">
+      <label for="date" class="col-form-label col-sm-2">Date:</label>
+      <div class="input-group date col-sm-10" id="datetimepicker1" data-target-input="nearest">
+          <input type="text" class="form-control datetimepicker-input datetimepicker" data-target="#datetimepicker1" data-toggle="datetimepicker" name="date" autocomplete="off"/>
+          <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
+              <span class="input-group-text fa fa-calendar"></span>
+          </div>
+      </div>
+      {% comment %} <div class="col-sm-10">
+          <input type="text" name="date" class="form-control">
+      </div> {% endcomment %}
+  </div>
+  <hr>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name1">Player 1:</label>
+    <div class="col-sm-10">
+    <select name="name1" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name2">Player 2:</label>
+    <div class="col-sm-10">
+    <select name="name2" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name3">Player 3:</label>
+    <div class="col-sm-10">
+    <select name="name3" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name4">Player 4:</label>
+    <div class="col-sm-10">
+    <select name="name4" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name5">Player 5:</label>
+    <div class="col-sm-10">
+    <select name="name5" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="team_a">Team:</label>
+    <div class="col-sm-10">
+    <select name="team_a" class="form-control">
+        {% for team in teams %}
+        <option value="{{ team.id }}">
+            {{ team.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+  <hr>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name6">Player 6:</label>
+    <div class="col-sm-10">
+    <select name="name6" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+          {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name7">Player 7:</label>
+    <div class="col-sm-10">
+    <select name="name7" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name8">Player 8:</label>
+    <div class="col-sm-10">
+    <select name="name8" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name9">Player 9:</label>
+    <div class="col-sm-10">
+    <select name="name9" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-2" for="name10">Player 10:</label>
+    <div class="col-sm-10">
+    <select name="name10" class="form-control">
+        {% for player in players %}
+        <option value="{{ player.id }}">
+            {{ player.name }}
+        </option>
+        {% endfor %}
+    </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+      <label class="col-form-label col-sm-2" for="team_b">Team:</label>
+      <div class="col-sm-10">
+      <select name="team_b" class="form-control">
+          {% for team in teams %}
+          <option value="{{ team.id }}">
+              {{ team.name }}
+          </option>
+          {% endfor %}
+      </select>
+      </div>
+  </div>
+  <hr>
+  <input type="submit" value="Send" class="btn btn-block btn-secondary">
+</form>
+
+{% endblock content %}
