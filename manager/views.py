@@ -3,6 +3,7 @@ from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
+from django.views.generic import ListView
 
 from .models import Player, Match, Team
 from .newplayerform import NewPlayerForm, UpdatePlayerForm
@@ -66,6 +67,12 @@ def players(request):
     }
 
     return render(request, 'manager/players.html', content)
+
+
+class PlayerListView(ListView):
+    model = Player
+    template_name = 'manager/players.html'
+    context_object_name = 'player_stats'
 
 
 def new_match(request):
@@ -310,6 +317,9 @@ def winner(request):
         # get goals result
         goals_team_a = request.POST.get('goals_team_a')
         goals_team_b = request.POST.get('goals_team_b')
+
+        if not goals_team_a.isdigit() or not goals_team_b.isdigit():
+            messages.warning(request, f'Please enter numbers (0,1,2,3...) for Goals please')
 
         # get winner id
         if goals_team_a.isdigit() and goals_team_b.isdigit():

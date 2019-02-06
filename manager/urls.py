@@ -11,6 +11,7 @@ from .views import (
     new_playerstats,
 )
 from . import views
+from .views import PlayerListView
 
 urlpatterns = [
     path('', home, name='manager-home'),
@@ -21,4 +22,6 @@ urlpatterns = [
     # path('new-player2/', new_player2, name="new_player2"),
     path('winner/', winner, name="winner"),
     path('players/', views.players, name='manager-players'),
+    # path('players/', PlayerListView.as_view(), name='manager-players'),
+
 ]
