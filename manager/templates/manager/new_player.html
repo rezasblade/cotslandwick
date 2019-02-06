@@ -1,0 +1,20 @@
+{% extends "manager/base.html" %}
+{% block content %}
+<form action="{% url 'new_player' %}" method="POST">
+    {% csrf_token %}
+
+    <div class="form-group row">
+            <div class="col-sm-10">
+            <label for="new_player" class="col-form-label col-sm-2">Player Name</label>
+            <input type="text" name="new_player" class="form-control">
+            <label for="new_player_preferredfoot" class="col-form-label col-sm-2">Preferred Foot:</label>
+            <input type="text" name="new_player_preferredfoot" class="form-control">
+            <label for="new_player_position" class="col-form-label col-sm-2">Position:</label>
+            <input type="text" name="new_player_position" class="form-control">
+            <label for="new_player_trait" class="col-form-label col-sm-2">Trait:</label>
+            <input type="text" name="new_player_trait" class="form-control">
+        </div>
+    </div>
+    <input type="submit" value="Add New Player" class="btn btn-block btn-secondary">
+</form>
+{% endblock content %}
