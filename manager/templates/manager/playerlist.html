@@ -1,0 +1,31 @@
+{% extends "manager/base.html" %}
+{% block content %}
+
+
+<table class="table table-dark">
+
+  <thead>
+    <tr>
+      <!-- <th scope="col">#</th> -->
+      <th scope="col">Name</th>
+      <th scope="col">preferredfoot</th>
+      <th scope="col">Position</th>
+      <th scope="col">trait</th>
+    </tr>
+  </thead>
+
+  <tbody>
+   {% for i in players %}
+    <tr>
+    <td><a href="{% url 'manager-players_edit' pk=i.id %}">{{i.name}}</a></td>
+
+      <td>{{i.preferredfoot}}</td>
+      <td>{{i.position}}</td>
+      <td>{{i.trait}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+{% endblock %}

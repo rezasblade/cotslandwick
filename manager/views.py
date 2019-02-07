@@ -1,13 +1,12 @@
 import time
-from django.shortcuts import get_object_or_404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from django.views.generic import ListView
+from django.views.generic.edit import UpdateView
 
 from .models import Player, Match, Team
 from .newplayerform import NewPlayerForm, UpdatePlayerForm
-from .playerstatsform import PlayerStats
 
 
 def home(request):
@@ -67,6 +66,21 @@ def players(request):
     }
 
     return render(request, 'manager/players.html', content)
+
+
+def playerlist(request):
+    # descending order player list by points
+    players = Player.objects.all().order_by('-points')
+    content = {
+        'players': players
+    }
+
+    return render(request, 'manager/playerlist.html', content)
+
+
+def player_detail(request, pk):
+    player = get_object_or_404(Player, pk=pk)
+    return render(request, 'manager/player_detail.html', {'player': player})
 
 
 class PlayerListView(ListView):
@@ -260,20 +274,52 @@ def new_player(request):
     return render(request, 'manager/new_player1.html', {'newplayerform': form})
 
 
+# class update_player(UpdateView):
+#     model = Player
+#     fields = ['name']
+#     template_names = 'manager/update_player.html'
+#     context_object_name = 'updateplayerform'
+
+
+# def update_player(request):
+#     # instance = get_object_or_404(Player, id=id)
+#     # form = UpdatePlayerForm(request.POST or None, instance=instance)
+#     form = UpdatePlayerForm()
+
+#     context = {
+
+#         'updateplayerform': form
+#     }
+
+
+#     if form.is_valid():
+#         form.save()
+#         print("updated player")
+#     return render(request, 'manager/update_player.html', context)
+
 def update_player(request):
-    # instance = get_object_or_404(Player, id=id)
-    # form = UpdatePlayerForm(request.POST or None, instance=instance)
-    form = UpdatePlayerForm()
+    if request.method == "POST":
+        form = UpdatePlayerForm(request.POST)
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.save()
+            return redirect('manager-players_detail', pk=player.pk)
+    else:
+        form = UpdatePlayerForm()
+    return render(request, 'manager/update_player.html', {'form': form})
 
-    context = {
 
-        'updateplayerform': form
-    }
-
-    if form.is_valid():
-        form.save()
-        print("updated player")
-    return render(request, 'manager/update_player.html', context)
+def player_edit(request, pk):
+    player = get_object_or_404(Player, pk=pk)
+    if request.method == "POST":
+        form = UpdatePlayerForm(request.POST, instance=player)
+        if form.is_valid():
+            player = form.save(commit=False)
+            player.save()
+            return redirect('manager-players_detail', pk=player.pk)
+    else:
+        form = UpdatePlayerForm(instance=player)
+    return render(request, 'manager/update_player.html', {'form': form})
 
 
 def new_playerstats(request):

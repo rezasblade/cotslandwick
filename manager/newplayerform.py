@@ -1,9 +1,5 @@
 from django import forms
-from .models import Player
-
-
-# class NewPlayerForm(forms.Form):
-#     name = forms.CharField()
+from .models import Player, Team
 
 
 class NewPlayerForm(forms.ModelForm):

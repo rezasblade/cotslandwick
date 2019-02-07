@@ -9,6 +9,9 @@ from .views import (
     # new_player2,
     winner,
     new_playerstats,
+    player_detail,
+    playerlist,
+
 )
 from . import views
 from .views import PlayerListView
@@ -16,12 +19,23 @@ from .views import PlayerListView
 urlpatterns = [
     path('', home, name='manager-home'),
     path('new-match/', new_match, name="new_match"),
-    path('new-player/', new_player, name="new_player"),
-    path('update-player/', update_player, name="update_player"),
-    # path('new-player1/', new_player1, name="new_player1"),
-    # path('new-player2/', new_player2, name="new_player2"),
+    path('playertable/', views.players, name='manager-players'),
     path('winner/', winner, name="winner"),
-    path('players/', views.players, name='manager-players'),
+
+    path('new-player/', views.new_player, name="new_player"),
+    # above uses class NewPlayerForm(forms.ModelForm):
+
+    path('playerlist/', views.playerlist, name='playerlist'),
+
+    path('update-player/', update_player, name="update_player"),
+    # above uses class NewPlayerForm(forms.ModelForm):
+
+
+    path('players/<int:pk>/', views.player_detail, name='manager-players_detail'),
+    path('players/<int:pk>/edit/', views.player_edit, name='manager-players_edit'),
+
+
+
     # path('players/', PlayerListView.as_view(), name='manager-players'),
 
 ]
