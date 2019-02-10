@@ -116,7 +116,7 @@ def new_match(request):
             different = True
             print('different teams')
 
-        if request.POST['date'] is not None:
+        if request.POST['date'] == '':
             messages.warning(request, 'Please select a match date!')
             return redirect('new_match')
 
@@ -227,6 +227,8 @@ def new_match(request):
                     team=team_b,
                     date=date)
                 match10.save()
+                messages.success(request, 'Match Created')
+                return redirect('manager-home')
 
     return render(request, 'manager/new_match.html', content)
 
