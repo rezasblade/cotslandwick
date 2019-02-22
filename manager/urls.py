@@ -21,16 +21,12 @@ urlpatterns = [
     path('new-match/', new_match, name="new_match"),
     path('playertable/', views.players, name='manager-players'),
     path('winner/', winner, name="winner"),
-
+    path('weather/', views.weather, name="weather"),
     path('new-player/', views.new_player, name="new_player"),
     # above uses class NewPlayerForm(forms.ModelForm):
-
     path('playerlist/', views.playerlist, name='playerlist'),
-
     path('update-player/', update_player, name="update_player"),
     # above uses class NewPlayerForm(forms.ModelForm):
-
-
     path('players/<int:pk>/', views.player_detail, name='manager-players_detail'),
     path('players/<int:pk>/edit/', views.player_edit, name='manager-players_edit'),
 

@@ -1,11 +1,12 @@
 import time
+import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from django.views.generic import ListView
 from django.views.generic.edit import UpdateView
 
-from .models import Player, Match, Team
+from .models import Player, Match, Team, City
 from .newplayerform import NewPlayerForm, UpdatePlayerForm
 
 
@@ -402,3 +403,45 @@ def winner(request):
                 player = Player.objects.filter(name=player.name).update(points=points)
 
     return render(request, 'manager/winner.html', content)
+
+
+def weather(request):
+
+    url = 'http://api.openweathermap.org/data/2.5/weather?q={}&units=metric&APPID=5715b122da9a97c73fd770a2c0b32d2d'
+    city = 'London'
+    # city1 = 'Hatfield'
+
+    cities = City.objects.all()
+
+    weather_data = []
+
+    for city in cities:
+
+        response = requests.get(url.format(city)).json()
+        # response1 = requests.get(url.format(city1)).json()
+
+        # create a dictionary to store the response values I am interested in
+
+        city_weather = {
+            'city': city.name,
+            'temperature': response['main']['temp'],
+            'description': response['weather'][0]['description'],
+            'icon': response['weather'][0]['icon'],
+        }
+
+        weather_data.append(city_weather)
+
+        # city_weather1 = {
+        #     'city': city1,
+        #     'temperature': response1['main']['temp'],
+        #     'description': response1['weather'][0]['description'],
+        #     'icon': response1['weather'][0]['icon'],
+        # }
+
+    print (city_weather)
+
+    context = {'city_weather': weather_data}
+    print(weather_data)
+
+    context = {'weather_data': weather_data}
+    return render(request, 'manager/weather.html', context)

@@ -76,3 +76,12 @@ class Match(models.Model):
 #     def __str__(self):
 #         # return '%s %s(Match Date) %s goals, and %s assists' % (self.name, self.matchdate, self.goals, self.assists)
 #         return '%s %s %s %s' % (self.name, self.matchdate, self.goals, self.assists)
+
+class City(models.Model):
+    name = models.CharField(max_length=25)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = 'cities'
